@@ -1,0 +1,18 @@
+{
+  "task": "show latest invoice of globex",
+  "status": "done",
+  "summary": "The latest invoice of Globex Corp is INV-1042, issued on May 5, 2026, with an amount of 3,980.00 USD and status Open.",
+  "evidence": [
+    "Invoice INV-1042",
+    "Vendor: Globex Corp",
+    "Issue date: May 5, 2026",
+    "Amount: 3,980.00 USD",
+    "Status: Open"
+  ],
+  "verified": false,
+  "steps": 8,
+  "memory": {
+    "latest_globex_invoice": "INV-1042, Globex Corp, Amount: 3,980.00 USD, Issue date: May 5, 2026, Due date: June 4, 2026, Status: Open"
+  },
+  "llm_calls": 10
+}
