@@ -9,8 +9,7 @@ Demo task (included simulated company):
 > *Find the latest invoice from Globex Corp in the vendor portal, enter it as a bill in the ERP, and confirm once done.*
 
 - **Author:** Satyam
-- **Username:** Satyam
-- **Password:** 12345678
+
 
 ---
 
@@ -31,6 +30,9 @@ pip install -r requirements.txt            # installs: anthropic, google-genai
 ```bash
 python ui.py                    # opens http://127.0.0.1:8765
 ```
+- **Username:** Satyam
+- **Password:** 12345678
+  
 Choose a provider and type a model name (for Gemini the default is `gemini-3.5-flash-lite`), type a task, click **Run**.
 You get a live feed of the agent's thoughts and actions, **Approve / Deny** buttons, a question box when the agent asks you
 something, the simulated ERP beside it, and a "ground truth" table showing what is really stored.
