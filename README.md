@@ -10,7 +10,7 @@ Demo task (included simulated company):
 
 - **Author:** Satyam
 - **Repository link:** [Satyam](https://github.com/satyamaa13-spec/Ai-Worker)
-  **Video link:** [Satyam](https://drive.google.com/file/d/1cdZp3b8HWvWJhZnN1YbpKE78GCFgbyjz/view?usp=drive_link)
+- **Video link:** [Satyam](https://drive.google.com/file/d/1cdZp3b8HWvWJhZnN1YbpKE78GCFgbyjz/view?usp=drive_link)
 
 ---
 
