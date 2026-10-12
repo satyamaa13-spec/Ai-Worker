@@ -9,8 +9,8 @@ Demo task (included simulated company):
 > *Find the latest invoice from Globex Corp in the vendor portal, enter it as a bill in the ERP, and confirm once done.*
 
 - **Author:** Satyam
-
-
+- **Username:** Satyam
+- **Password:** 12345678
 
 ---
 
