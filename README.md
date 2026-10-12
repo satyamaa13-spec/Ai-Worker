@@ -9,8 +9,8 @@ Demo task (included simulated company):
 > *Find the latest invoice from Globex Corp in the vendor portal, enter it as a bill in the ERP, and confirm once done.*
 
 - **Author:** Satyam
-- **Repository link:** [Satyam](https://github.com/satyamaa13-spec/Ai-Worker)
-- **Video link:** [Satyam](https://drive.google.com/file/d/1cdZp3b8HWvWJhZnN1YbpKE78GCFgbyjz/view?usp=drive_link)
+- **Repository link:** [github.com/satyamaa13-spec/Ai-Worker](https://github.com/satyamaa13-spec/Ai-Worker)
+- **Video link:** [Demo video on Google Drive](https://drive.google.com/file/d/1cdZp3b8HWvWJhZnN1YbpKE78GCFgbyjz/view?usp=drive_link)
 
 ---
 
@@ -33,10 +33,11 @@ python ui.py                    # opens http://127.0.0.1:8765
 ```
 - **Username:** Satyam
 - **Password:** 12345678
+- (Demo login for the local sandbox only. These are not real credentials.)
   
 Choose a provider and type a model name (for Gemini the default is `gemini-3.5-flash-lite`), type a task, click **Run**.
 You get a live feed of the agent's thoughts and actions, **Approve / Deny** buttons, a question box when the agent asks you
-something, the simulated ERP beside it, and a "ground truth" table showing what is really stored.
+something, the simulated ERP beside it.
 Optional controls: *Max model calls* (hard cap) and *skip extra verifier call*.
 The **Add test data** button opens a form to add invoices (or load a 5-invoice test pack) without editing code.
 
@@ -106,7 +107,7 @@ which the highest invoice number is *not* the newest, portal formats (`June 4, 2
    the user and `run.py`/`ui.py`.
 2. **The code enforces what a prompt can only request.**
    - *Approval gate:* state-changing requests whose action name looks like delete/remove/pay/transfer/cancel
-     pause for the user. Denial returns "do not work around this; finish as blocked". Approvals are cached per action+amount so retries don't re-prompt.
+     pause for the user. Denial returns "do not work around this; finish as blocked". Approvals are cached per action and values so retries don't re-prompt.
    - *Verification gate:* `finish("done")` is rejected if a write was sent and no successful read has happened since.
    - *Independent verifier:* a separate model call sees only the raw observations (not the agent's reasoning) and must agree they
      *prove* the outcome. If it disagrees, the agent is told why and continues.
@@ -138,14 +139,14 @@ which the highest invoice number is *not* the newest, portal formats (`June 4, 2
 
 ## 4. Evidence: what was and was not verified
 
-- **Automated tests (7):** run against the real sandbox with a *scripted* stand-in for the model. They verify the **harness**, not model
+- **Automated tests (11):** run against the real sandbox with a *scripted* stand-in for the model. They verify the **harness**, not model
   intelligence: format rejection, commit-then-500 without duplicates, premature-finish rejection, approval grant/deny,
   verifier rejection, host/path/form errors surfacing as observations, call-budget cap, verifier skipping, admin page and its agent block.
 - **Live run (Gemini `gemini-3.8-flash`, terminal):** finished `done`, independently verified, 11 steps. It selected INV-1042 by date,
   received the ERP's HTTP 500, re-read the ERP instead of retrying blindly, and the sandbox database held exactly one bill
   (`3980.00`, due `2026-06-04`).
 - **Browser UI:** server and UI exercised end to end with a scripted replay (approval, completion, stop). Live Gemini runs through the UI
-  were limited by the free-tier daily quota. [UPDATE THIS LINE IF YOU COMPLETE A LIVE RUN IN THE UI]
+  were limited by the free-tier daily quota.
 - **Claude adapter:** implemented against the Messages API; **not run live by the author**.
 - **Not tested:** Gemini Flash-Lite models, long multi-vendor tasks at scale, any real website.
 
@@ -154,7 +155,7 @@ which the highest invoice number is *not* the newest, portal formats (`June 4, 2
 ## 5. Known limitations
 
 - Text browser only: no JavaScript, screenshots, PDFs, uploads or downloads. Sites that need JS will not work.
-- Approval rules are heuristic (amount threshold and action-name keywords); no per-user policy or audit trail beyond `trace.jsonl`.
+- Approval rules are heuristic (action-name keywords only: delete, remove, pay, transfer, cancel); no per-user policy or audit trail beyond `trace.jsonl`.
 - "Re-read after write" is a coarse proxy for verification; the LLM verifier covers semantics but can be wrong, and it shares a model family
   with the worker (correlated blind spots).
 - Prompt injection from page or file content is only partly mitigated (host allow-list, approval gate); it is not solved.
