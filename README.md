@@ -202,5 +202,4 @@ worker/agent.py        loop, gates, verification, memory   worker/tools.py      
 worker/browser.py      text browser                        worker/llm.py           Gemini / Claude / scripted adapters
 worker/io.py           terminal I/O                        sandbox/server.py       simulated company (+ admin test-data page)
 sandbox/workspace/     an inbox note               tests/test_harness.py   automated tests
-docs/DEMO_SCRIPT.md    how the demo video was planned
 ```
